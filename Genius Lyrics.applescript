@@ -7,12 +7,12 @@ tell application "iTunes"
 	set artistName to artist of selection
 end tell
 
-set pathwithspaces to "/Users/Naveed/Documents/Side Projects/GeniusLyrics/main.py"
+set pathWithSpaces to "/Library/iTunes/Scripts/main.py"
 
-set py to "/usr/local/bin/python3 " & quoted form of pathwithspaces & " \"" & artistName & "\" \"" & songName & "\""
+set py to "/usr/local/bin/python3 " & quoted form of pathWithSpaces & " \"" & artistName & "\" \"" & songName & "\""
 do shell script py
 
-set newLyrics to (read POSIX file "/Users/Naveed/Documents/Side Projects/GeniusLyrics/lyrics.txt")
+set newLyrics to (read POSIX file "/Library/iTunes/Scripts/lyrics.txt")
 if newLyrics = "Lyrics not found" then
 	display dialog "Lyrics not found" buttons {"Ok"} with icon caution
 	error number -128
@@ -21,3 +21,5 @@ end if
 tell application "iTunes"
 	set lyrics of selection to newLyrics as string
 end tell
+
+display dialog "Done!" buttons {"Ok"} with icon note
