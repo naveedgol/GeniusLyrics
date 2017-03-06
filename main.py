@@ -4,11 +4,11 @@ from bs4 import BeautifulSoup
 
 #extract custom genius api token from txt file, obtained from https://genius.com/api-clients
 def extract_token():
-    token = open("API_token.txt", "r")
+    token = open("/Users/Naveed/Documents/Side Projects/GeniusLyrics/API_token.txt", "r")
     return token.read()
 
 def txt_export(lyrics):
-    lyrics_file = open("lyrics.txt", "w")
+    lyrics_file = open("/Users/Naveed/Documents/Side Projects/GeniusLyrics/lyrics.txt", "w")
     lyrics_file.write(lyrics)
 
 #Genius api lacks getting lyrics, manually scrape results
@@ -35,7 +35,10 @@ def search(artist, song):
 
 def export_lyrics(artist, song):
     song_url = search(artist, song)
-    song_lyrics = lyric_scraper(song_url)
-    txt_export(song_lyrics)
+    if song_url:
+        song_lyrics = lyric_scraper(song_url)
+        txt_export(song_lyrics)
+    else:
+        txt_export("Lyrics not found")
 
-export_lyrics("Drake", "Still Here")
+export_lyrics(sys.argv[1], sys.argv[2])
