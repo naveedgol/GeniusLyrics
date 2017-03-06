@@ -16,7 +16,6 @@ def lyric_scraper(url):
     source = requests.get(url).text
     source_soup = BeautifulSoup(source, "html.parser")
     lyrics = source_soup.find("lyrics")
-    # print(lyrics.get_text().strip())
     return lyrics.get_text().strip()
 
 #Search Genius for a song with corresponding artist
@@ -28,10 +27,7 @@ def search(artist, song):
 
     for match in search_results["response"]["hits"]:
         if artist == match["result"]["primary_artist"]["name"]:
-            # print(match["result"]["url"])
             return match["result"]["url"]
-
-    #indicate a fail to fetch
 
 def export_lyrics(artist, song):
     song_url = search(artist, song)
